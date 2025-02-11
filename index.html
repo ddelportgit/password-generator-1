@@ -11,6 +11,7 @@
     <div class="container">
       <h1 class="title">Password Generator</h1>
       <h3 class="password-display" id="password-display">Password</h3>
+
       <form class="form" id="password-generator-form">
         <label for="character-amount-number">Number of Characters</label>
         <div class="character-amount-container">
@@ -35,7 +36,12 @@
         <input type="checkbox" id="include-symbols" />
 
         <button type="submit" class="button">Generate Password</button>
+        <button id="copy-password" class="button">Copy</button>
+
+        <div id="darkmode-button">Theme</div>
       </form>
     </div>
+
+    <div id="copy-toast" class="default-toast">Copied to clipboard</div>
   </body>
 </html>

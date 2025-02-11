@@ -30,7 +30,7 @@ form.addEventListener("submit", (e) => {
     includeNumbers,
     includeSymbols
   );
-  passwordDisplay.innerText = password;
+  typePassword(password);
 });
 
 function generatePassword(characterAmount, includeUppercase, includeNumbers, includeSymbols) {
@@ -63,3 +63,49 @@ function syncCharacterAmount(e) {
   characterAmountNumber.value = value;
   characterAmountRange.value = value;
 }
+
+// COPY TO CLIPBOARD
+
+const copyButton = document.getElementById("copy-password");
+
+copyButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  const password = document.getElementById("password-display").textContent;
+  navigator.clipboard
+    .writeText(password)
+    .then(() => {
+      const toast = document.getElementById("copy-toast");
+      toast.classList.add("show-toast");
+      setTimeout(() => {
+        toast.classList.remove("show-toast");
+      }, 2000);
+    })
+    .catch((e) => {
+      console.error("Failed to copy", e);
+    });
+});
+
+// TYPING EFFECT FOR PASSWORD
+
+function typePassword(password) {
+  passwordDisplay.textContent = "";
+  let index = 0;
+
+  const interval = setInterval(() => {
+    if (index < password.length) {
+      passwordDisplay.textContent += password[index];
+      index++;
+    } else {
+      clearInterval(interval);
+    }
+  }, 75);
+}
+
+// DARKMODE
+
+const darkmode = document.getElementById("darkmode-button");
+
+darkmode.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+  document.querySelector(".container").classList.toggle("dark-mode");
+});
